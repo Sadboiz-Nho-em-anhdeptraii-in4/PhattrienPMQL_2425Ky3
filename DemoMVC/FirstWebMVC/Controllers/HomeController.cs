@@ -10,22 +10,19 @@ public class HomeController : Controller
 
     public HomeController(ILogger<HomeController> logger)
     {
-        _logger = logger;
+            _logger = logger;
+        }
+    
+        public IActionResult Index()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult Index(string FullName, string Address)
+        {
+            string strOutput = "Xin chao " + FullName + ", dia chi cua ban la: " + Address;
+            ViewBag.Output = strOutput;
+            return View();
+        }
     }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-}

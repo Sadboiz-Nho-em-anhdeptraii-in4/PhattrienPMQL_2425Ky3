@@ -1,9 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<h1>View Index HomeControllers</h1>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-<h2>Danh sach cac san pham</h2>
+<form asp-action="Index">
+    <label>NhapHoTen:</label>
+    <input type="text" name="FullName" />
+    <label>NhapDiaChi</label>
+    <input type="text" name="Address" />
+    <input type="submit" value="GuiDuLieu" />
+</form>
+
+<h1>@ViewBag.Message</h1>
