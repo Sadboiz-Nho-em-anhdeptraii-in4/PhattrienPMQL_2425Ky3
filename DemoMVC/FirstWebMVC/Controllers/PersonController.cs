@@ -11,16 +11,7 @@ public class PersonController : Controller
         return View();
     }
 
-    // GET: /Person/Details/
-    public IActionResult Details()
-    {
-        Person person = new Person
-        {
-            PersonId = "2121051322",
-            FullName = "Bui Ngoc Anh"
-        };
-        return View(person);
-    }
+    // POST: /Person/
     [HttpPost]
     public IActionResult Index(Person ps)
     {
