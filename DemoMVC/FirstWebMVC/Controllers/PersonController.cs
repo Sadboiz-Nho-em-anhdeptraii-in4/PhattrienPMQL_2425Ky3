@@ -22,21 +22,30 @@ namespace FirstWebMVC.Controllers
 
         public IActionResult Create()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PersonId,FullName,Address")] Person person)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(person);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+            string newId = GenerateNewPersonId();
+            var person = new Person { PersonId = newId };
             return View(person);
         }
+
+        private string GenerateNewPersonId()
+        {
+            var lastPerson = _context.Persons
+                .OrderByDescending(p => p.PersonId)
+                .FirstOrDefault();
+
+            int nextIdNumber = 1;
+            if (lastPerson != null && lastPerson.PersonId?.Length > 0)
+            {
+                // Assuming PersonId is a string like "P001", extract the number part
+                string numberPart = lastPerson.PersonId.Substring(1);
+                if (int.TryParse(numberPart, out int lastNumber))
+                {
+                    nextIdNumber = lastNumber + 1;
+                }
+            }
+            return $"P{nextIdNumber:D3}"; // Format as "P001", "P002", etc.
+        }
+
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)

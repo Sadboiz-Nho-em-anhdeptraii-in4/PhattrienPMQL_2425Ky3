@@ -3,7 +3,7 @@ namespace FirstWebMVC.Models;
 
 public class Employee : Person
 {
-    public int? EmployeeId { get; set; }
+    public string? EmployeeId { get; set; }
     [DataType(DataType.Date)]
     public int Age { get; set; }
 }
