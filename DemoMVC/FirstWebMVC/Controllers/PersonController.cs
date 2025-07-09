@@ -31,7 +31,6 @@ namespace FirstWebMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                person.PersonId = Guid.NewGuid().ToString(); // Generate a new unique ID
                 _context.Add(person);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
