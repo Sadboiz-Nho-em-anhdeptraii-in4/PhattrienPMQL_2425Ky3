@@ -10,14 +10,42 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstWebMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250709104617_AddDiscriminatorToPerson")]
-    partial class AddDiscriminatorToPerson
+    [Migration("20250714012546_AddDaiLy")]
+    partial class AddDaiLy
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.6");
+
+            modelBuilder.Entity("FirstWebMVC.Models.DaiLy", b =>
+                {
+                    b.Property<string>("MaDaiLy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DienThoai")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MaHTPP")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NguoiDaiDien")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TenDaiLy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TenHTPP")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MaDaiLy");
+
+                    b.ToTable("DaiLy");
+                });
 
             modelBuilder.Entity("FirstWebMVC.Models.Person", b =>
                 {

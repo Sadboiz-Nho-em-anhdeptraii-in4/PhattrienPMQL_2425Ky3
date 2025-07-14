@@ -5,22 +5,21 @@
 namespace FirstWebMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Create_table_Person : Migration
+    public partial class AddHTPP : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "HeThongPhanPhoi",
                 columns: table => new
                 {
-                    PersonId = table.Column<string>(type: "TEXT", nullable: false),
-                    FullName = table.Column<string>(type: "TEXT", nullable: true),
-                    Address = table.Column<string>(type: "TEXT", nullable: true)
+                    MaHTPP = table.Column<string>(type: "TEXT", nullable: false),
+                    TenHTPP = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.PersonId);
+                    table.PrimaryKey("PK_HeThongPhanPhoi", x => x.MaHTPP);
                 });
         }
 
@@ -28,7 +27,7 @@ namespace FirstWebMVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "HeThongPhanPhoi");
         }
     }
 }

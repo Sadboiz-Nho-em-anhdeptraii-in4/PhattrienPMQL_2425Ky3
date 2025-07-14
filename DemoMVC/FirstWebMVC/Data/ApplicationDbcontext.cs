@@ -22,6 +22,8 @@ namespace FirstWebMVC.Data
             .HasValue<Person>("Person")
             .HasValue<Employee>("Employee");
         }
+        public DbSet<FirstWebMVC.Models.DaiLy> DaiLy { get; set; } = default!;
+        public DbSet<FirstWebMVC.Models.HeThongPhanPhoi> HeThongPhanPhoi { get; set; } = default!;
 
     }
 }
