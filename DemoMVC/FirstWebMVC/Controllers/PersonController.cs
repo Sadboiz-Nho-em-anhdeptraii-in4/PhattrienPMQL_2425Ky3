@@ -3,6 +3,7 @@ using FirstWebMVC.Models;
 using FirstWebMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using FirstWebMVC.Models.Process;
+using OfficeOpenXml;
 
 namespace FirstWebMVC.Controllers
 {
@@ -129,6 +130,22 @@ namespace FirstWebMVC.Controllers
         private bool PersonExists(string id)
         {
             return (_context.Persons?.Any(e => e.PersonId == id)).GetValueOrDefault();
+        }
+
+        public IActionResult Download()
+        {
+            var fileName = "YourFileName" + ".xlsx";
+            using (ExcelPackage excelPackage = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
+                worksheet.Cells["A1"].Value = "PersonId";
+                worksheet.Cells["B1"].Value = "FullName";
+                worksheet.Cells["C1"].Value = "Address";
+                var personList = _context.Persons.ToList();
+                worksheet.Cells["A2"].LoadFromCollection(personList);
+                var stream = new MemoryStream(excelPackage.GetAsByteArray());
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
         }
 
         public async Task<IActionResult> Upload()
