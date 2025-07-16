@@ -7,6 +7,8 @@ namespace FirstWebMVC.Models.Process
     {
         public DataTable ExcelToDataTable(string strPath)
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Set the license context for EPPlus
+
             FileInfo fi = new FileInfo(strPath);
             ExcelPackage excelPackage = new ExcelPackage(fi);
             DataTable dt = new DataTable();

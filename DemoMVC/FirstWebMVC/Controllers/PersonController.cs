@@ -13,9 +13,10 @@ namespace FirstWebMVC.Controllers
 
         private readonly ExcelProcess _excelProcess;
 
-        public PersonController(ApplicationDbContext context)
+        public PersonController(ApplicationDbContext context, ExcelProcess excelProcess)
         {
             _context = context;
+            _excelProcess = excelProcess;
         }
 
         public async Task<IActionResult> Index()
@@ -23,7 +24,7 @@ namespace FirstWebMVC.Controllers
             var model = await _context.Persons.ToListAsync();
             return View(model);
         }
-
+        
         public IActionResult Create()
         {
             string newId = GenerateNewPersonId();
@@ -129,7 +130,7 @@ namespace FirstWebMVC.Controllers
         }
         private bool PersonExists(string id)
         {
-            return (_context.Persons?.Any(e => e.PersonId == id)).GetValueOrDefault();
+            return _context.Persons.Any(e => e.PersonId == id);
         }
 
         public IActionResult Download()
