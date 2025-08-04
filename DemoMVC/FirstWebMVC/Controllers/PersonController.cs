@@ -4,6 +4,8 @@ using FirstWebMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using FirstWebMVC.Models.Process;
 using OfficeOpenXml;
+using X.PagedList;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FirstWebMVC.Controllers
 {
@@ -19,9 +21,20 @@ namespace FirstWebMVC.Controllers
             _excelProcess = excelProcess;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page, int? PageSize)
         {
-            var model = await _context.Persons.ToListAsync();
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "3", Value = "3" },
+                new SelectListItem { Text = "5", Value = "5" },
+                new SelectListItem { Text = "10", Value = "10" },
+                new SelectListItem { Text = "15", Value = "15" },
+                new SelectListItem { Text = "25", Value = "25" },
+                new SelectListItem { Text = "50", Value = "50" }
+            };
+            int pagesize = (PageSize ?? 3);
+            ViewBag.psize = pagesize;
+            var model = _context.Persons.ToList().ToPagedList(page ?? 1, pagesize);
             return View(model);
         }
         
