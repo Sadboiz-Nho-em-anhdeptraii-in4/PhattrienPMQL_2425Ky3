@@ -151,8 +151,10 @@ namespace FirstWebMVC.Controllers
 
         public async Task<IActionResult> Upload()
         {
+            var content = await System.IO.File.ReadAllTextAsync("wwwroot/Uploads/Excels/Upload.html");
             return View();
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
 
